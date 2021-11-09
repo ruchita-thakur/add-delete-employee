@@ -1,0 +1,45 @@
+<app-new-employee (employeeAdd)="addEmployee($event)"></app-new-employee>
+<br>
+<div class="container">
+  <h4 class="text-center">All employees</h4>
+</div>
+<div class="text-center" *ngIf="this.employees.length===0; else elseBlock">No Employees to display</div>
+<ng-template #elseBlock>
+  <div class='card container'>
+    <div class='card-header'>
+      {{pageTitle}}
+    </div>
+    <div class='table-responsive'>
+      <table class='table' *ngIf='employees.length'>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Location</th>
+            <th>Department</th>
+            <th>Phone Number</th>
+            <th>Comments</th>
+            <th>Documents submitted</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let employee of employees'>
+            <td>{{employee.name}}</td>
+            <td>{{employee.gender}}</td>
+            <td>{{employee.location}}</td>
+            <td>{{employee.department}}</td>
+            <td>{{employee.phoneNumber}}</td>
+            <td>{{employee.suggestions}}</td>
+            <td>{{employee.agreeCheckbox}}</td>
+            <td><button class="btn btn-danger" (click)="deleteEmployee(employee)">Delete</button></td>
+            <!-- <td><app-employee-add [employee]="employee" (employeeDelete)="deleteEmployee($event)"></app-employee-add></td> -->
+            <!-- <td>
+              <app-employee-add [employee]="employee"></app-employee-add>
+            </td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ng-template>

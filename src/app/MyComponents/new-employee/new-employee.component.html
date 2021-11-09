@@ -1,0 +1,95 @@
+<br>
+<div class="card">
+  <div class="container">
+    <br>
+    <h5 class="text-center">Add new employee</h5>
+  </div>
+  <form #userForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class=" box">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter your name" name="name" required
+          [(ngModel)]="name" #nameField="ngModel" />
+        <div *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)" class="alert alert-danger">Name is
+          Required</div>
+      </div>
+      <div class="form-group">
+        <label for="gender">Gender</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" id="gender" value="male" required
+            [(ngModel)]="gender" #genderField="ngModel" />
+          <label class="form-check-label" for="gender">
+            Male
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" id="gender" value="female" required
+            [(ngModel)]="gender" #genderField="ngModel" />
+          <label class="form-check-label" for="gender">
+            Female
+          </label>
+        </div>
+        <div *ngIf="genderField.invalid && (genderField.dirty || genderField.touched)" class="alert alert-danger">Gender
+          is Required</div>
+      </div>
+      <div class="form-group">
+        <label for="location">Location</label>
+        <select class="form-control" id="location" name="location" placeholder="Select your location" required
+          [(ngModel)]="location" #locationField="ngModel">
+          <option value="Pune">Pune</option>
+          <option value="Mumbai">Mumbai</option>
+          <option value="Bangalore">Bangalore</option>
+        </select>
+        <div *ngIf="locationField.invalid && (locationField.dirty || locationField.touched)" class="alert alert-danger">
+          Location is Required</div>
+      </div>
+      <div class="form-group">
+        <label for="department">Department</label>
+        <select class="form-control" id="department" name="department" required [(ngModel)]="department"
+          #departmentField="ngModel">
+          <option value="Europe CSD">Europe CSD</option>
+          <option value="Financial Services">Financial Services</option>
+          <option value="Apps NA">Apps NA</option>
+          <option value="Cloud Infrastructure Services">Cloud Infrastructure Services</option>
+        </select>
+        <div *ngIf="departmentField.invalid && (departmentField.dirty || departmentField.touched)"
+          class="alert alert-danger">Department is Required</div>
+      </div>
+      <div class="form-group">
+        <label for="phoneNumber">Phone Number</label>
+        <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="1234567890"
+          [(ngModel)]="phoneNumber" maxlength="10" #phoneNumberField="ngModel" required pattern="^\d{10}$">
+        <div *ngIf="phoneNumberField.invalid && (phoneNumberField.dirty || phoneNumberField.touched)"
+          class="alert alert-danger">Phone Number is required with 10 digits
+          <div *ngIf="phoneNumberField.errors?.minlength">
+            Phone Number should be 10 digits
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="suggestions">Comments</label>
+        <textarea id="suggestions" name="suggestions" class="form-control" rows="2"
+          [(ngModel)]="suggestions"></textarea>
+      </div>
+      <div class="form-check form-group">
+        <input class="form-check-input" type="checkbox" value="yes" id="agreeCheckbox" name="agreeCheckbox"
+          [(ngModel)]="agreeCheckbox" required #checkField="ngModel">
+        <label class="form-check-label" for="agreeCheckbox">
+          All documents submitted
+        </label>
+        <div *ngIf="checkField.invalid && (checkField.dirty || checkField.touched)" class="alert alert-danger">Checkbox
+          should be checked</div>
+      </div>
+      <div>
+        <div>
+          <button type="submit"
+            [disabled]="!name|| !gender || !location || !department || !phoneNumber || !agreeCheckbox"
+            class="btn btn-success">Add</button>&nbsp;
+            <button type="button" (click)="resetUserForm(userForm)" class="btn btn-primary">Reset</button>  
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
